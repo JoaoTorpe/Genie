@@ -1,6 +1,7 @@
-package com.torpe.genie.Repositories;
+package com.torpe.genie.Services;
 
-import com.torpe.genie.Models.User;
+
+import com.torpe.genie.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,9 +22,8 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User u = userRepository.findByEmail(username).orElseThrow(()-> new RuntimeException("Usuário nao encontrado"));
 
-        return new UserDetailsImpl();
+        return userRepository.findByEmail(username).orElseThrow(()-> new RuntimeException("Usuário nao encontrado"));
 
 
     }
