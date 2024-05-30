@@ -1,9 +1,9 @@
-package Repositories;
+package com.torpe.genie.Repositories;
 
-import Models.Question;
+import com.torpe.genie.Models.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface QuestionRepository extends JpaRepository<Question,String> {
+public interface QuestionRepository extends JpaRepository<Question,Long> {
 }
