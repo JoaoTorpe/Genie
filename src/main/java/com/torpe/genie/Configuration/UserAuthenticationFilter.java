@@ -1,7 +1,8 @@
-package com.torpe.genie.Services;
+package com.torpe.genie.Configuration;
 
 import com.torpe.genie.Models.User;
 import com.torpe.genie.Repositories.UserRepository;
+import com.torpe.genie.Services.JwtServices;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
