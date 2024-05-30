@@ -1,14 +1,20 @@
-package Models;
+package com.torpe.genie.Models;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
+@Table(name = "user_table")
 public class User {
-
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String email;
+
     private String password;
     private String name;
 
