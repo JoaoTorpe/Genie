@@ -1,5 +1,6 @@
 package com.torpe.genie.Controllers;
 
+import com.torpe.genie.DTOs.LoginUserDTO;
 import com.torpe.genie.DTOs.RegisterUserDTO;
 import com.torpe.genie.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +16,12 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity registerUser(@RequestBody RegisterUserDTO u){
-            try {
-                userServices.registerUser(u);
-            }
-            catch (RuntimeException exception){
-                throw new RuntimeException("Erro ao registrar usuario",exception);
-            }
+               return userServices.registerUser(u);
+    }
 
-
-        return ResponseEntity.ok().build();
-
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody LoginUserDTO u){
+        return userServices.login(u);
     }
 
 }
