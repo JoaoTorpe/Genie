@@ -1,2 +1,4 @@
-package com.torpe.genie.DTOs;public record TokenDTO() {
+package com.torpe.genie.DTOs;
+
+public record TokenDTO(String token) {
 }
