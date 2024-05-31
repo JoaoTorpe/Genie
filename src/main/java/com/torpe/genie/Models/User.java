@@ -24,6 +24,8 @@ public class User implements UserDetails {
     @Column(name = "NAME",nullable = false)
     private String name;
 
+    public User(){}
+
     public User(String email , String password,String name){
 
         this.email = email;

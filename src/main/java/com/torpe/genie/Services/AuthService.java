@@ -15,10 +15,6 @@ public class AuthService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
