@@ -1,5 +1,6 @@
 package com.torpe.genie.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class User implements UserDetails {
     @Column(name = "EMAIL", nullable = false)
     private String email;
     @Column(name = "PASSWORD",nullable = false)
+    @JsonIgnore
     private String password;
     @Column(name = "NAME",nullable = false)
     private String name;
@@ -36,36 +38,44 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
 
     @Override
+    @JsonIgnore
+
     public String getPassword() {
         return this.password;
     }
 
     @Override
+    @JsonIgnore
     public String getUsername() {
         return this.email;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }
