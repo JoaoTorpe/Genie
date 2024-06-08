@@ -5,7 +5,9 @@ import com.torpe.genie.DTOs.RegisterUserDTO;
 import com.torpe.genie.DTOs.TokenDTO;
 import com.torpe.genie.Models.User;
 import com.torpe.genie.Repositories.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +59,14 @@ public ResponseEntity login(LoginUserDTO u){
     catch(RuntimeException exception){
         throw new RuntimeException("Falaha ao logar",exception);
     }
+    }
+
+    public User currentUser(HttpServletRequest request){
+        String token = jwtServices.recoveryToken(request);
+        String subject = jwtServices.getSubjectFromToken(token);
+        Optional<User> user = userRepository.findByEmail(subject);
+        return user.get();
+
     }
 
 }
