@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.torpe.genie.Models.User;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -47,6 +48,13 @@ public class JwtServices {
         }
     }
 
+    public String recoveryToken(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader != null) {
+            return authorizationHeader.replace("Bearer ", "");
+        }
+        return null;
+    }
 
     private Instant creationDate() {
         return ZonedDateTime.now(ZoneId.of("America/Recife")).toInstant();
