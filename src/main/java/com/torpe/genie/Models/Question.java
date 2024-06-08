@@ -4,8 +4,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
+
 @Setter
 @Getter
 @Entity
@@ -18,22 +21,42 @@ public class Question {
     @ManyToOne
     private User creator;
 
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
-    private Date resolutionDate;
+    private LocalDateTime resolutionDate;
 
-    private Boolean corret;
+    private Boolean correct;
 
-    private ArrayList<String> answersList  = new ArrayList<>();
+    private String command;
 
-    private String rightAnswer;
+    private String subject;
+
+    private String topic;
+
+    private String difficulty;
+
+    private String hint;
+
+    private List<String> resolution;
+
+    @OneToMany
+    private List<Options> answersList  = new ArrayList<>();
 
 
-    public Question(User creator, Date creationDate, ArrayList<String> answersList, String rightAnswer) {
+
+    public Question(){}
+    public Question(User creator, List<Options> answersList,String subject,String topic,String hint,List<String>resolution,String command,String difficulty) {
+
         this.creator = creator;
-        this.creationDate = creationDate;
+        this.creationDate = LocalDateTime.now();
         this.answersList = answersList;
-        this.rightAnswer = rightAnswer;
+        this.subject = subject;
+        this.topic = topic;
+        this.hint = hint;
+        this.resolution = resolution;
+        this.command = command;
+        this.difficulty = difficulty;
+
     }
 
 }
