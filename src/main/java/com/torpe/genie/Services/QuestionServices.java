@@ -1,6 +1,5 @@
 package com.torpe.genie.Services;
 
-import com.torpe.genie.DTOs.GetUserDTO;
 import com.torpe.genie.DTOs.QuestionDTO;
 import com.torpe.genie.Models.Options;
 import com.torpe.genie.Models.Question;
@@ -12,7 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
+
 
 @Service
 public class QuestionServices {
@@ -31,15 +31,36 @@ public class QuestionServices {
 
 
     public ResponseEntity createQuestion(QuestionDTO newQuestionData, User creator){
+    if(newQuestionData.enunciado() == null|| newQuestionData.alternativas() == null){
 
+        throw new RuntimeException("Dados invalidos");
+
+    }
         for (Options o : newQuestionData.alternativas()){
+
             optionsRepository.save(o);
         }
 
         Question newQuestion = new Question(creator,newQuestionData.alternativas(),newQuestionData.materia(),newQuestionData.assunto(), newQuestionData.dica(),newQuestionData.resolucao(), newQuestionData.enunciado(), newQuestionData.dificuldade());
+
+
         questionRepository.save(newQuestion);
+
+        for (Options o : newQuestion.getAnswersList()){
+
+            o.setQuestion(newQuestion);
+            optionsRepository.save(o);
+
+        }
+
+
         return ResponseEntity.ok().body(newQuestion);
 
+    }
+
+    public ResponseEntity<List<Question>> findAllQuestions(Long userID){
+
+                 return ResponseEntity.ok().body(questionRepository.findByCreator_id(userID));
     }
 
 

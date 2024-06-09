@@ -26,7 +26,7 @@ public class Question {
     private LocalDateTime resolutionDate;
 
     private Boolean correct;
-
+    @Column(length = 500)
     private String command;
 
     private String subject;
@@ -36,10 +36,10 @@ public class Question {
     private String difficulty;
 
     private String hint;
-
+    @Column(length = 500)
     private List<String> resolution;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Options> answersList  = new ArrayList<>();
 
 
@@ -57,6 +57,10 @@ public class Question {
         this.command = command;
         this.difficulty = difficulty;
 
+    }
+
+    public List<Options> getAnswersList(){
+        return this.answersList;
     }
 
 }
