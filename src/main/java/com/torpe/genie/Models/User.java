@@ -37,6 +37,10 @@ public class User implements UserDetails {
 
     }
 
+    public Long getId(){
+        return id;
+    }
+
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
