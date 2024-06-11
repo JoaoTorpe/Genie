@@ -63,4 +63,8 @@ public class Question {
         return this.answersList;
     }
 
+    public void setCorrect(Boolean correct){
+        this.correct = correct;
+    }
+
 }

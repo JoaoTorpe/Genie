@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -63,5 +64,15 @@ public class QuestionServices {
                  return ResponseEntity.ok().body(questionRepository.findByCreator_id(userID));
     }
 
+    public ResponseEntity putCorrect(Long id,Boolean correct){
+
+        Optional<Question> questionOp = questionRepository.findById(id);
+           Question question =  questionOp.get();
+           question.setCorrect(correct);
+
+           questionRepository.save(question);
+
+        return ResponseEntity.ok().body("");
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.torpe.genie.Controllers;
 
 import com.torpe.genie.DTOs.GetUserDTO;
+import com.torpe.genie.DTOs.PutCorrectDTO;
 import com.torpe.genie.DTOs.QuestionDTO;
 import com.torpe.genie.Models.Question;
 import com.torpe.genie.Models.User;
@@ -39,6 +40,12 @@ public class QuestionController {
 
         User currentUser = userServices.currentUser(request);
         return questionServices.findAllQuestions(currentUser.getId());
+    }
+
+    @PutMapping
+    public  ResponseEntity putCorret(@RequestBody PutCorrectDTO putData ){
+
+          return   questionServices.putCorrect(putData.id(),putData.correct());
     }
 
 }
