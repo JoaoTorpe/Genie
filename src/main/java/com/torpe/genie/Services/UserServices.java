@@ -34,6 +34,9 @@ public class UserServices {
         Optional<User> checkIfUserExists = userRepository.findByEmail(u.email());
 
         if (checkIfUserExists.isEmpty()) {
+            if(u.password().isEmpty() || u.name().isEmpty()){
+                throw new RuntimeException("Usuario invalido");
+            }
 
             try {
                 String encryptedPassword = new BCryptPasswordEncoder().encode(u.password());
