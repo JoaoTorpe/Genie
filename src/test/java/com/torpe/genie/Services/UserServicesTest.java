@@ -3,6 +3,7 @@ package com.torpe.genie.Services;
 import com.torpe.genie.DTOs.RegisterUserDTO;
 import com.torpe.genie.Models.User;
 import com.torpe.genie.Repositories.UserRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,6 +46,22 @@ class UserServicesTest {
         services.registerUser(dto);
         verify(userRepository,times(1)).save(any());
     }
+
+    @Test
+    @DisplayName("Should throw an error")
+    void registerUserError(){
+        RegisterUserDTO dto = new RegisterUserDTO("test@gmail.com","","mytest");
+        when(userRepository.findByEmail(dto.email())).thenReturn(Optional.empty());
+
+        Exception thrown = Assertions.assertThrows(Exception.class,()->{
+            services.registerUser(dto);
+        });
+
+        Assertions.assertEquals("Usuario invalido",thrown.getMessage());
+
+    }
+
+
 
 
 }
