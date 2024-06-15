@@ -29,15 +29,9 @@ public class Question {
     @Column(length = 500)
     private String command;
 
-    private String subject;
-
     private String topic;
 
-    private String difficulty;
-
     private String hint;
-    @Column(length = 500)
-    private List<String> resolution;
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<Options> answersList  = new ArrayList<>();
@@ -45,17 +39,15 @@ public class Question {
 
 
     public Question(){}
-    public Question(User creator, List<Options> answersList,String subject,String topic,String hint,List<String>resolution,String command,String difficulty) {
+    public Question(User creator, List<Options> answersList,String topic,String hint,String command) {
 
         this.creator = creator;
         this.creationDate = LocalDateTime.now();
         this.answersList = answersList;
-        this.subject = subject;
         this.topic = topic;
         this.hint = hint;
-        this.resolution = resolution;
         this.command = command;
-        this.difficulty = difficulty;
+
 
     }
 

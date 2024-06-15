@@ -32,17 +32,13 @@ public class QuestionServices {
 
 
     public ResponseEntity createQuestion(QuestionDTO newQuestionData, User creator){
-    if(newQuestionData.enunciado() == null|| newQuestionData.alternativas() == null){
 
-        throw new RuntimeException("Dados invalidos");
-
-    }
         for (Options o : newQuestionData.alternativas()){
 
             optionsRepository.save(o);
         }
 
-        Question newQuestion = new Question(creator,newQuestionData.alternativas(),newQuestionData.materia(),newQuestionData.assunto(), newQuestionData.dica(),newQuestionData.resolucao(), newQuestionData.enunciado(), newQuestionData.dificuldade());
+        Question newQuestion = new Question(creator,newQuestionData.alternativas(),newQuestionData.assunto(), newQuestionData.dica(), newQuestionData.enunciado());
 
 
         questionRepository.save(newQuestion);
