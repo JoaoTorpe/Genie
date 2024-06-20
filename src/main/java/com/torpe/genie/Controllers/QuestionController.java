@@ -43,7 +43,7 @@ public class QuestionController {
     }
 
     @PutMapping
-    public  ResponseEntity putCorret(@RequestBody PutCorrectDTO putData ){
+    public  ResponseEntity putCorrect(@RequestBody PutCorrectDTO putData ){
 
           return   questionServices.putCorrect(putData.id(),putData.correct());
     }
