@@ -29,7 +29,9 @@ public class SecurityConfiguration {
                 .headers(h-> h.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->auth
-                                .anyRequest().permitAll()
+                                .requestMatchers("/users/**").permitAll()
+                                .requestMatchers("/questions/**").authenticated()
+
                         )
 
                 .addFilterBefore(userAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
