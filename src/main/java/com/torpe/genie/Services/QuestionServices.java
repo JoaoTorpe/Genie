@@ -1,5 +1,6 @@
 package com.torpe.genie.Services;
 
+import com.torpe.genie.DTOs.InsightsDTO;
 import com.torpe.genie.DTOs.QuestionDTO;
 import com.torpe.genie.Models.Options;
 import com.torpe.genie.Models.Question;
@@ -22,12 +23,7 @@ public class QuestionServices {
     QuestionRepository questionRepository;
 
     @Autowired
-    UserRepository userRepository;
-
-    @Autowired
     OptionsRepository optionsRepository;
-    @Autowired
-    JwtServices jwtServices;
 
 
 
@@ -69,6 +65,15 @@ public class QuestionServices {
            questionRepository.save(question);
 
         return ResponseEntity.ok().body("");
+    }
+
+    public ResponseEntity getInsights(Long id){
+
+    Long correctQuestion = questionRepository.countQuestionByCreator_idAndCorrect(id,true);
+    Long wrongQuestions = questionRepository.countQuestionByCreator_idAndCorrect(id,false);
+    Long totalAnsweredQuestions = correctQuestion + wrongQuestions;
+        InsightsDTO insightsDTO = new InsightsDTO(totalAnsweredQuestions,correctQuestion,wrongQuestions);
+    return ResponseEntity.ok().body(insightsDTO);
     }
 
 }
