@@ -13,4 +13,6 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
 
     @Query("SELECT q FROM Question q WHERE q.creator.id = :creatorId ORDER BY q.id DESC")
     List<Question> findByCreator_id(@Param("creatorId") Long creatorId);
+    Long countQuestionByCreator_idAndCorrect(Long creatorId , boolean correct);
+
 }
