@@ -48,4 +48,11 @@ public class QuestionController {
           return   questionServices.putCorrect(putData.id(),putData.correct());
     }
 
+    @GetMapping("/insights")
+    public ResponseEntity getInsights(HttpServletRequest request){
+        User currentUser =  userServices.currentUser(request);
+        return questionServices.getInsights(currentUser.getId());
+    }
+
+
 }
